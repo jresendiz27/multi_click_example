@@ -50,7 +50,7 @@ jobs:
         include:
           - os: macos-latest
             TARGET: macos
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos_${{ github.ref_name }} -F && cd dist/ && zip -r9 multi_click_example_macos multi_click_example.app/
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos_${{ github.ref_name }} -F && cd dist/ && zip -r9 multi_click_example_macos . -i multi_click_example.app/
             OUT_FILE_NAME: multi_click_example_macos_${{ github.ref_name }}.zip
             ASSET_MIME: application/zip
           - os: windows-latest
