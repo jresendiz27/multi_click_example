@@ -50,17 +50,19 @@ jobs:
         include:
           - os: macos-latest
             TARGET: macos
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos -F
-            OUT_FILE_NAME: multi_click_example_macos
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos_${{ github.ref }} -F && cd dist/ && zip -r9 multi_click_example_macos multi_click_example.app/
+            OUT_FILE_NAME: multi_click_example_macos.zip
+            ASSET_MIME: application/zip
           - os: windows-latest
             TARGET: windows
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_windows -F
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_windows_${{ github.ref }} -F
             OUT_FILE_NAME: multi_click_example_windows.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
           - os: ubuntu-latest
             TARGET: ubuntu
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_linux -F
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_linux_${{ github.ref }} -F
             OUT_FILE_NAME: multi_click_example_linux
+            ASSET_MIME: application/octet-stream
     steps:
     - uses: actions/checkout@v3
     - name: Install poetry
@@ -91,4 +93,4 @@ jobs:
         upload_url: ${{ steps.get_release_info.outputs.upload_url }}
         asset_path: ./dist/${{ matrix.OUT_FILE_NAME}}
         asset_name: ${{ matrix.OUT_FILE_NAME}}
-        asset_content_type: application/octet-stream
+        asset_content_type: ${{ matrix.ASSET_MIME }}
