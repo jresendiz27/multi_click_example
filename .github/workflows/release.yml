@@ -19,7 +19,7 @@ on:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
-  createrelease:
+  create_release:
     name: Create Release
     runs-on: [ubuntu-latest]
     steps:
@@ -71,13 +71,13 @@ jobs:
         python-version: '3.9'
         cache: 'poetry'
     - run: poetry install
-
     - name: Build with pyinstaller for ${{matrix.TARGET}}
       run: ${{matrix.CMD_BUILD}}
     - name: Load Release URL File from release job
       uses: actions/download-artifact@v3
       with:
         name: release_url
+        path: release_url.txt
     - name: Get Release File Name & Upload URL
       id: get_release_info
       shell: bash
