@@ -49,37 +49,28 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            env:
-              TARGET_OS: mac-os
             TARGET: macos
             CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos -F
             OUT_FILE_NAME: multi_click_example_macos
             ASSET_MIME: application/zip
           - os: windows-latest
-            env:
-              TARGET_OS: windows
             TARGET: windows
             CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_windows -F
             OUT_FILE_NAME: multi_click_example_windows.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
           - os: ubuntu-latest
-            env:
-              TARGET_OS: linux
             TARGET: ubuntu
             CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_linux -F
             OUT_FILE_NAME: multi_click_example_linux
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.8
-      run: |
-        python -m pip install poetry
-      uses: actions/setup-python@v4
+    - name: Install poetry
+      run: python -m pip install poetry
+    - uses: actions/setup-python@v4
       with:
-        python-version: 3.9
-        cache: poetry
-    - name: Install dependencies
-      run: |
-        poetry install
+        python-version: '3.9'
+        cache: 'poetry'
+    - run: poetry install
 
     - name: Build with pyinstaller for ${{matrix.TARGET}}
       run: ${{matrix.CMD_BUILD}}
