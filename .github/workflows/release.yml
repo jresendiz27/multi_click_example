@@ -1,8 +1,20 @@
 name: Release
 
 permissions:
-  packages: write
+  actions: write
+  checks: none
+  contents: write
   deployments: write
+  metadata: write
+  id-token: read
+  issues: read
+  discussions: read
+  packages: write
+  pages: write
+  pull-requests: read
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 on:
   push:
