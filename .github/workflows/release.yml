@@ -52,7 +52,6 @@ jobs:
             TARGET: macos
             CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos -F
             OUT_FILE_NAME: multi_click_example_macos
-            ASSET_MIME: application/zip
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_windows -F
@@ -82,8 +81,7 @@ jobs:
       id: get_release_info
       shell: bash
       run: |
-        ls -la release_url/
-        value=`cat release_url/release_url.txt`
+        value=`cat release_url.txt`
         echo ::set-output name=upload_url::$value
     - name: Upload Release Asset
       id: upload-release-asset
