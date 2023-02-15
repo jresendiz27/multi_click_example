@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "multi-click-example"
+version = "0.1.0"
+description = "multi platform python cli"
+authors = ["Juan Reséndiz <jresendiz27@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "multi_click_example"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+pyinstaller = "^5.4.0"
+click = "^8.1.3"
+requests = "^2.28.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
