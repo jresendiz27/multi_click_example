@@ -50,18 +50,18 @@ jobs:
         include:
           - os: macos-latest
             TARGET: macos
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos_${{ github.ref }} -F && cd dist/ && zip -r9 multi_click_example_macos multi_click_example.app/
-            OUT_FILE_NAME: multi_click_example_macos.zip
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_macos_${{ github.ref_name }} -F && cd dist/ && zip -r9 multi_click_example_macos multi_click_example.app/
+            OUT_FILE_NAME: multi_click_example_macos_${{ github.ref_name }}.zip
             ASSET_MIME: application/zip
           - os: windows-latest
             TARGET: windows
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_windows_${{ github.ref }} -F
-            OUT_FILE_NAME: multi_click_example_windows.exe
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_windows_${{ github.ref_name }} -F
+            OUT_FILE_NAME: multi_click_example_windows_${{ github.ref_name }}.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
           - os: ubuntu-latest
             TARGET: ubuntu
-            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_linux_${{ github.ref }} -F
-            OUT_FILE_NAME: multi_click_example_linux
+            CMD_BUILD: poetry run pyinstaller --specpath ./ ./multi_click_example/main.py  --clean -n multi_click_example_linux_${{ github.ref_name }} -F
+            OUT_FILE_NAME: multi_click_example_linux_${{ github.ref_name }}
             ASSET_MIME: application/octet-stream
     steps:
     - uses: actions/checkout@v3
