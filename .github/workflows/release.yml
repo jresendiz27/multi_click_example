@@ -80,10 +80,7 @@ jobs:
       id: get_release_info
       shell: bash
       run: |
-        ls -la .
-        if [ -d "release" ]; then ls -la release/; else echo "release Directory not exist "; fi
-        if [ -f "release_url.txt" ]; then cat release_url.txt; else echo "File does not exist"; fi
-        value=`cat release/release_url.txt`
+        value=`cat release_url.txt`
         echo ::set-output name=upload_url::$value
     - name: Upload Release Asset
       id: upload-release-asset
@@ -94,4 +91,3 @@ jobs:
         upload_url: ${{ steps.get_release_info.outputs.upload_url }}
         asset_path: ./dist/${{ matrix.OUT_FILE_NAME}}
         asset_name: ${{ matrix.OUT_FILE_NAME}}
-        asset_content_type: ${{ matrix.ASSET_MIME}}
