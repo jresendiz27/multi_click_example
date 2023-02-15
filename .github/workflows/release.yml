@@ -5,7 +5,6 @@ permissions:
   checks: none
   contents: write
   deployments: write
-  metadata: write
   id-token: read
   issues: read
   discussions: read
